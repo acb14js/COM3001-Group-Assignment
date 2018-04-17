@@ -5,8 +5,8 @@ function plot_results(agent,nsteps,fmode,outImages)
     %plot_results(agent,nr,nf)
     %%%%%%%%%%%
     %agent - current list of agent structures
-    %nr -  no. rabbits
-    %nf -  no. rabbits
+    %nr -  no. elks
+    %nf -  no. elks
 
     % Modified by D Walker 3/4/08
 
@@ -24,12 +24,12 @@ function plot_results(agent,nsteps,fmode,outImages)
     nr=IT_STATS.tot_r;
     nf=IT_STATS.tot_f;
     disp(strcat('Iteration = ',num2str(N_IT)))
-    disp(strcat('No. new rabbits = ',num2str(IT_STATS.div_r(N_IT+1))))
+    disp(strcat('No. new elks = ',num2str(IT_STATS.div_r(N_IT+1))))
     disp(strcat('No. new foxes = ',num2str(IT_STATS.div_f(N_IT+1))))
     disp(strcat('No. agents migrating = ',num2str(IT_STATS.mig(N_IT+1))))
-    disp(strcat('No. rabbits dying = ',num2str(IT_STATS.died_r(N_IT+1))))
+    disp(strcat('No. elks dying = ',num2str(IT_STATS.died_r(N_IT+1))))
     disp(strcat('No. foxes dying = ',num2str(IT_STATS.died_f(N_IT+1))))
-    disp(strcat('No. rabbits eaten = ',num2str(IT_STATS.eaten(N_IT+1))))
+    disp(strcat('No. elks eaten = ',num2str(IT_STATS.eaten(N_IT+1))))
 
     %plot line graphs of agent numbers and remaining food
     if (fmode==false) || (N_IT==nsteps) || ((fmode==true) && (rem(N_IT , CONTROL_DATA.fmode_display_every)==0))
@@ -38,7 +38,7 @@ function plot_results(agent,nsteps,fmode,outImages)
         %This value increases with the number of agents (see ecolab.m L57-61) as plotting more agents takes longer. 
         %fmode can be turned off in the command line - see ecolab documentation
 
-        col{1}='r-';                   %set up colours that will represent different cell types red for rabbits, blue for foxes
+        col{1}='r-';                   %set up colours that will represent different cell types red for elks, blue for foxes
         col{2}='b-';
 
         tot_food=IT_STATS.tfood;       %total food remaining
@@ -56,7 +56,7 @@ function plot_results(agent,nsteps,fmode,outImages)
         subplot(3,1,3),cla
         subplot(3,1,3),plot((1:N_IT+1),tot_food(1:N_IT+1),'m-');
         subplot(3,1,3),axis([0 nsteps 0 tot_food(1)]);
-        subplot(3,1,1),title('No. live rabbits');
+        subplot(3,1,1),title('No. live elks');
         subplot(3,1,2),title('No. live foxes');
         subplot(3,1,3),title('Total food');
         drawnow
@@ -84,7 +84,7 @@ function plot_results(agent,nsteps,fmode,outImages)
         for cn=1:length(agent)                          %cycle through each agent in turn
             if typ(cn)>0                                %only plot live agents
                 pos=get(agent{cn},'pos');               %extract current position    
-                if isa(agent{cn},'rabbit')              %choose plot colour depending on agent type
+                if isa(agent{cn},'elk')              %choose plot colour depending on agent type
                     ro=plot(pos(1),pos(2),'r*');
                 else   
                     fo=plot(pos(1),pos(2),'b.'); 

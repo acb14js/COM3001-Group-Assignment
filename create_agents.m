@@ -3,7 +3,7 @@ function [agent]=create_agents(nr,nf)
  %creates the objects representing each agent
  
 %agent - cell array containing list of objects representing agents
-%nr - number of rabbits
+%nr - number of elks
 %nf - number of foxes
 
 %global parameters
@@ -17,20 +17,20 @@ function [agent]=create_agents(nr,nf)
  global ENV_DATA MESSAGES PARAM 
   
 bm_size=ENV_DATA.bm_size;
-rloc=(bm_size-1)*rand(nr,2)+1;      %generate random initial positions for rabbits
+rloc=(bm_size-1)*rand(nr,2)+1;      %generate random initial positions for elks
 floc=(bm_size-1)*rand(nf,2)+1;      %generate random initial positions for foxes
 
 MESSAGES.pos=[rloc;floc];
 
-%generate all rabbit agents and record their positions in ENV_MAT_R
+%generate all elk agents and record their positions in ENV_MAT_R
 for r=1:nr
     pos=rloc(r,:);
-    %create rabbit agents with random ages between 0 and 10 days and random
+    %create elk agents with random ages between 0 and 10 days and random
     %food levels 20-40
     age=ceil(rand*10);
     food=ceil(rand*20)+20;
     lbreed=round(rand*PARAM.R_BRDFQ);
-    agent{r}=rabbit(age,food,pos,PARAM.R_SPD,lbreed);
+    agent{r}=elk(age,food,pos,PARAM.R_SPD,lbreed);
 end
 
 %generate all fox agents and record their positions in ENV_MAT_F

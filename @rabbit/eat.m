@@ -1,9 +1,9 @@
 function [agt,eaten]=eat(agt,cn)
 
-%eating function for class RABBIT
-%agt=rabbit object
+%eating function for class elk
+%agt=elk object
 %cn - current agent number
-%eaten = 1 if rabbit finds food, =0 otherwise
+%eaten = 1 if elk finds food, =0 otherwise
 
 %ENV_DATA is a data structure containing information about the model
    %environment
@@ -12,10 +12,10 @@ function [agt,eaten]=eat(agt,cn)
    %    ENV_DATA.bm_size - length of environment edge in km
    %    ENV_DATA.food is  a bm_size x bm_size array containing distribution of food
   
-%SUMMARY OF RABBIT EAT RULE
-%rabbit detects food level in its 1km x 1km square of the environment
-%if food> 1, rabbit will consume food
-%otherwise rabbit food level decremented by 1.
+%SUMMARY OF elk EAT RULE
+%elk detects food level in its 1km x 1km square of the environment
+%if food> 1, elk will consume food
+%otherwise elk food level decremented by 1.
 
 %Modified by D Walker 3/4/08
 
@@ -30,10 +30,10 @@ pfood=ENV_DATA.food(cpos(1),cpos(2));   %obtain environment food level at curren
 if pfood>=1                             %if food exists at this location
     ENV_DATA.food(cpos(1),cpos(2))=ENV_DATA.food(cpos(1),cpos(2))-1;  %reduce environment food by one unit
     agt.food=cfood+1;                    %increase agent food by one unit
-    eaten=1;                             %rabbit has eaten - set flag to one
+    eaten=1;                             %elk has eaten - set flag to one
 else
     agt.food=cfood-1;                   %decrease agent food by one unit
-    eaten=0;                            %flag tells rabbit to migrate
+    eaten=0;                            %flag tells elk to migrate
 end
     
    

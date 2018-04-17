@@ -12,7 +12,7 @@ classdef fox           %declares fox object
                 %f=fox(age,food,pos....)
                 %
                 %age of agent (usually 0)
-                %food - amount of food that rabbit has eaten
+                %food - amount of food that elk has eaten
                 %pos - vector containg x,y, co-ords 
 
                 %Modified by Martin Bayley on 29/01/13

@@ -11,10 +11,10 @@ function initialise_results(nr,nf,nsteps)
                 'div_f',[zeros(1,nsteps+1)],...
                 'died_r',[zeros(1,nsteps+1)],...			%no. agents dying per iteration
                 'died_f',[zeros(1,nsteps+1)],...		
-                'eaten',[zeros(1,nsteps+1)],...              %no. rabbits eaten per iteration
+                'eaten',[zeros(1,nsteps+1)],...              %no. elks eaten per iteration
                 'mig',[zeros(1,nsteps+1)],...                %no. agents migrating per iteration
                 'tot',[zeros(1,nsteps+1)],...				%total no. agents in model per iteration
-                'tot_r',[zeros(1,nsteps+1)],...             % total no. rabbits
+                'tot_r',[zeros(1,nsteps+1)],...             % total no. elks
                 'tot_f',[zeros(1,nsteps+1)],...             % total no. foxes
                 'tfood',[zeros(1,nsteps+1)]);               %remaining vegetation level
             
