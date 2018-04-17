@@ -6,7 +6,7 @@ function create_messages(nr,nf,agent)
 %MESSAGES is a data structure containing information that agents need to
 %broadcast to each other
    %    MESSAGES.atype - n x 1 array listing the type of each agent in the model
-   %    (1=elk, 2-fox, 3=dead agent)
+   %    (1=elk, 2-wolf, 3=dead agent)
    %    MESSAGES.pos - list of every agent position in [x y]
    %    MESSAGE.dead - n x1 array containing ones for agents that have died
    %    in the current iteration
@@ -17,7 +17,7 @@ function create_messages(nr,nf,agent)
      if isa(agent{an},'elk')
         MESSAGES.atype(an)=1;
         MESSAGES.pos(an,:)=get(agent{an},'pos');
-     elseif isa(agent{an},'fox')
+     elseif isa(agent{an},'wolf')
         MESSAGES.atype(an)=2;
         MESSAGES.pos(an,:)=get(agent{an},'pos');
      else

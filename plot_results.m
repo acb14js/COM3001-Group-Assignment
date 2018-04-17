@@ -25,10 +25,10 @@ function plot_results(agent,nsteps,fmode,outImages)
     nf=IT_STATS.tot_f;
     disp(strcat('Iteration = ',num2str(N_IT)))
     disp(strcat('No. new elks = ',num2str(IT_STATS.div_r(N_IT+1))))
-    disp(strcat('No. new foxes = ',num2str(IT_STATS.div_f(N_IT+1))))
+    disp(strcat('No. new wolfes = ',num2str(IT_STATS.div_f(N_IT+1))))
     disp(strcat('No. agents migrating = ',num2str(IT_STATS.mig(N_IT+1))))
     disp(strcat('No. elks dying = ',num2str(IT_STATS.died_r(N_IT+1))))
-    disp(strcat('No. foxes dying = ',num2str(IT_STATS.died_f(N_IT+1))))
+    disp(strcat('No. wolfes dying = ',num2str(IT_STATS.died_f(N_IT+1))))
     disp(strcat('No. elks eaten = ',num2str(IT_STATS.eaten(N_IT+1))))
 
     %plot line graphs of agent numbers and remaining food
@@ -38,7 +38,7 @@ function plot_results(agent,nsteps,fmode,outImages)
         %This value increases with the number of agents (see ecolab.m L57-61) as plotting more agents takes longer. 
         %fmode can be turned off in the command line - see ecolab documentation
 
-        col{1}='r-';                   %set up colours that will represent different cell types red for elks, blue for foxes
+        col{1}='r-';                   %set up colours that will represent different cell types red for elks, blue for wolfes
         col{2}='b-';
 
         tot_food=IT_STATS.tfood;       %total food remaining
@@ -57,7 +57,7 @@ function plot_results(agent,nsteps,fmode,outImages)
         subplot(3,1,3),plot((1:N_IT+1),tot_food(1:N_IT+1),'m-');
         subplot(3,1,3),axis([0 nsteps 0 tot_food(1)]);
         subplot(3,1,1),title('No. live elks');
-        subplot(3,1,2),title('No. live foxes');
+        subplot(3,1,2),title('No. live wolfes');
         subplot(3,1,3),title('Total food');
         drawnow
 

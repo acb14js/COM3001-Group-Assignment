@@ -4,7 +4,7 @@ function [agent]=create_agents(nr,nf)
  
 %agent - cell array containing list of objects representing agents
 %nr - number of elks
-%nf - number of foxes
+%nf - number of wolfes
 
 %global parameters
 %ENV_DATA - data structure representing the environment (initialised in
@@ -18,7 +18,7 @@ function [agent]=create_agents(nr,nf)
   
 bm_size=ENV_DATA.bm_size;
 rloc=(bm_size-1)*rand(nr,2)+1;      %generate random initial positions for elks
-floc=(bm_size-1)*rand(nf,2)+1;      %generate random initial positions for foxes
+floc=(bm_size-1)*rand(nf,2)+1;      %generate random initial positions for wolfes
 
 MESSAGES.pos=[rloc;floc];
 
@@ -33,13 +33,13 @@ for r=1:nr
     agent{r}=elk(age,food,pos,PARAM.R_SPD,lbreed);
 end
 
-%generate all fox agents and record their positions in ENV_MAT_F
+%generate all wolf agents and record their positions in ENV_MAT_F
 for f=nr+1:nr+nf
     pos=floc(f-nr,:);
-    %create fox agents with random ages between 0 and 10 days and random
+    %create wolf agents with random ages between 0 and 10 days and random
     %food levels 20-40
     age=ceil(rand*10);
     food=ceil(rand*20)+20;
     lbreed=round(rand*PARAM.F_BRDFQ);
-    agent{f}=fox(age,food,pos,PARAM.F_SPD,lbreed);
+    agent{f}=wolf(age,food,pos,PARAM.F_SPD,lbreed);
 end

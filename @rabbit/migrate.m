@@ -71,7 +71,7 @@ if mig==0                                   %elk has been unable to find food, s
     while mig==0&cnt<=8                     
         npos(1)=pos(1)+spd*cos(dir);        %new x co-ordinate
         npos(2)=pos(2)+spd*sin(dir);        %new y co-ordinate
-        if npos(1)<ENV_DATA.bm_size&npos(2)<ENV_DATA.bm_size&npos(1)>=1&npos(2)>=1   %check that fox has not left edge of model - correct if so.
+        if npos(1)<ENV_DATA.bm_size&npos(2)<ENV_DATA.bm_size&npos(1)>=1&npos(2)>=1   %check that wolf has not left edge of model - correct if so.
            mig=1;
         end
         cnt=cnt+1;

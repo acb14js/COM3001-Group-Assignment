@@ -1,11 +1,11 @@
 function [agt]=migrate(agt,cn)
 
-%migration functions for class FOX
-%agt=fox object
+%migration functions for class wolf
+%agt=wolf object
 %cn - current agent number
 
-%SUMMARY OF FOX MIGRATE RULE
-%If a fox has not eaten, it will pick a random migration direction
+%SUMMARY OF wolf MIGRATE RULE
+%If a wolf has not eaten, it will pick a random migration direction
 %If it will leave the edge of the model, the direction is incremented by 45
 %degrees at it will try again (up to 8 times)
 %modified by D Walker 11/4/08
@@ -30,11 +30,11 @@ pos=agt.pos;     %extract current position
 
 mig=0;
 cnt=1;
-dir=rand*2*pi;              %fox has been unable to find food, so chooses a random direction to move in
-while mig==0&cnt<=8        %fox has up to 8 attempts to migrate (without leaving the edge of the model)
+dir=rand*2*pi;              %wolf has been unable to find food, so chooses a random direction to move in
+while mig==0&cnt<=8        %wolf has up to 8 attempts to migrate (without leaving the edge of the model)
     npos(1)=pos(1)+spd*cos(dir);        %new x co-ordinate
     npos(2)=pos(2)+spd*sin(dir);        %new y co-ordinate
-    if npos(1)<ENV_DATA.bm_size&npos(2)<ENV_DATA.bm_size&npos(1)>=1&npos(2)>=1   %check that fox has not left edge of model - correct if so.
+    if npos(1)<ENV_DATA.bm_size&npos(2)<ENV_DATA.bm_size&npos(1)>=1&npos(2)>=1   %check that wolf has not left edge of model - correct if so.
        mig=1;
     end
     cnt=cnt+1;

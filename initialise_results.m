@@ -15,7 +15,7 @@ function initialise_results(nr,nf,nsteps)
                 'mig',[zeros(1,nsteps+1)],...                %no. agents migrating per iteration
                 'tot',[zeros(1,nsteps+1)],...				%total no. agents in model per iteration
                 'tot_r',[zeros(1,nsteps+1)],...             % total no. elks
-                'tot_f',[zeros(1,nsteps+1)],...             % total no. foxes
+                'tot_f',[zeros(1,nsteps+1)],...             % total no. wolfes
                 'tfood',[zeros(1,nsteps+1)]);               %remaining vegetation level
             
  

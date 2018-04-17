@@ -1,6 +1,6 @@
 function val=get(c,prop_name)
 
-%standard function to allow extraction of memory parameters from fox object
+%standard function to allow extraction of memory parameters from wolf object
 
 switch prop_name
    

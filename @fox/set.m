@@ -1,6 +1,6 @@
 function c=set(c,prop_name,val)
 
-%standard function to allow insertion of memory parameters from fox object
+%standard function to allow insertion of memory parameters from wolf object
 
 switch prop_name
    

@@ -17,7 +17,7 @@ function [nagent,nn]=update_messages(agent,prev_n,temp_n)
 %MESSAGES is a data structure containing information that agents need to
 %broadcast to each other
    %    MESSAGES.atype - n x 1 array listing the type of each agent in the model
-   %    (1=elk, 2-fox, 3=dead agent)
+   %    (1=elk, 2-wolf, 3=dead agent)
    %    MESSAGES.pos - list of every agent position in [x y]
    %    MESSAGE.dead - n x1 array containing ones for agents that have died
    %    in the current iteration
@@ -43,7 +43,7 @@ for cn=1:temp_n
          if isa(agent{cn},'elk')
              MESSAGES.atype(cn)=1;
              IT_STATS.tot_r(N_IT+1)=IT_STATS.tot_r(N_IT+1)+1;
-         elseif isa(agent{cn},'fox')
+         elseif isa(agent{cn},'wolf')
              MESSAGES.atype(cn)=2;
              IT_STATS.tot_f(N_IT+1)=IT_STATS.tot_f(N_IT+1)+1;
          end

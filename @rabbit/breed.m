@@ -10,7 +10,7 @@ global PARAM IT_STATS N_IT
 %IT_STATS is data structure containing statistics on model at each
 %iteration (no. agents etc)
 %PARAM is data structure containing migration speed and breeding
-%frequency parameters for both foxes and elks
+%frequency parameters for both wolfes and elks
    
 flim=PARAM.R_FOODBRD;       %minimum food level required for breeding
 tlim=PARAM.R_BRDFQ;         %minimum interval required for breeding
