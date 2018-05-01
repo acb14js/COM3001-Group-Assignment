@@ -16,12 +16,6 @@ global ENV_DATA MESSAGES
    %    of food
    
 %MESSAGES is a data structure containing information about the agents
-   %environment
-   %    ENV_DATA.shape - shape of environment - FIXED AS SQUARE
-   %    ENV_DATA.units - FIXED AS KM
-   %    ENV_DATA.bm_size - length of environment edge in km
-   %    ENV_DATA.food is  a bm_size x bm_size array containing distribution
-   %    of food
 
 if cpos(1)>ENV_DATA.bm_size-spd
     xmax=ENV_DATA.bm_size; % Only when the agent is near the edge.
@@ -44,5 +38,8 @@ else
     ymin=cpos(2)-spd;
 end
 
-loc_agt=MESSAGES.pos(xmin:xmax,ymin:ymax);
+xcoord = MESSAGES.pos(xmin:xmax,1);
+ycoord = MESSAGES.pos(ymin:ymax,2);
+loc_agt = [xcoord,ycoord];
+%loc_agt=MESSAGES.pos([xmin:xmax,ymin:ymax]);
 
