@@ -38,8 +38,9 @@ else
     ymin=cpos(2)-spd;
 end
 
-xcoord = MESSAGES.pos(xmin:xmax,1);
-ycoord = MESSAGES.pos(ymin:ymax,2);
-loc_agt = [xcoord,ycoord];
+loc_agt=MESSAGES.pos([xmin:xmax,ymin:ymax]);
+%xcoord = MESSAGES.pos(xmin:xmax,1);
+%ycoord = MESSAGES.pos(ymin:ymax,2);
+%loc_agt = [xcoord,ycoord];
 %loc_agt=MESSAGES.pos([xmin:xmax,ymin:ymax]);
 
