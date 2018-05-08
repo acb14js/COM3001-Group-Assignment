@@ -14,7 +14,7 @@ function [agt]=migrate(agt,cn)
 %If no food is detected within its search radius it will move randomly (up
 %to 8 atempts without leaving the model edge)
 
-global ENV_DATA IT_STATS N_IT 
+global ENV_DATA IT_STATS N_IT MESSAGES 
 %N_IT is current iteration number
 %IT_STATS is data structure containing statistics on model at each
 %iteration (no. agents etc)
@@ -39,13 +39,28 @@ spd=agt.speed;                       %elk migration speed in units per iteration
 %xmin in minimum x co-ord of this area
 %ymin is minimum y co-ord of this area
 [loc_food,xmin,ymin]=extract_local_food(cpos,spd);
+
+typ=MESSAGES.atype;
+el=find(typ==1);      
+elpos=MESSAGES.pos(el,:);                                     %extract positions of all elks
+csep_elk=sqrt((elpos(:,1)-pos(:,1)).^2+(elpos(:,2)-pos(:,2)).^2);  %calculate distance to all elks
+[d_elk,ind_elk]=min(csep_elk);                                            %d is distance to closest elk, ind is index of that elk
+nrst_elk = el(ind_elk);		% Calculate the position of the nearest elk, THIS SHOULD BE XY
+nelx=MESSAGES.pos(nrst_elk,1);    %extract exact location of this elk
+nely=MESSAGES.pos(nrst_elk,2);
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- 
 mig=0;                          %flag will be reset to one if elk migrates
 [xf,yf]=find(loc_food);        %extract all rows (=x) and columns (=y) of food matrix where food is present
+
+compare = kron([nelx,nely],ones(size(xf,1),1));
+
 if ~isempty(xf)      
     xa=xmin+xf-1;                  %x co-ordiantes of all squares containing food
     ya=ymin+yf-1;                  %y co-ordiantes of all squares containing food
+    
+    dotter = dot(compare, [xa,ya], 2);
+    
     csep=sqrt((xa-pos(:,1)).^2+(ya-pos(:,2)).^2);   %calculate distance to all food
     [d,nrst]=min(csep);     %d is distance to closest food, nrst is index of that food
     if d<=spd       %if there is at least one lot of food within the search radius        
