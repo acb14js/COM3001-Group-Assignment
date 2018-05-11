@@ -23,7 +23,7 @@ function [agt,eaten]=eat(agt,cn)
 %Modified by D Walker 3/4/08
 
 
-global  ENV_DATA 
+global  ENV_DATA MESSAGES
 
 pos=agt.pos;                            %extract current position 
 
@@ -42,12 +42,12 @@ for i = 1: length(dwo) - 1
     else
        p = rand
        if p < 0.5
-           dow(i) = [];
+           dwo(i) = [];
        end
     end
 end
 
-if length(dow) < 1   
+if length(dwo) < 1   
     cfood=agt.food;                         %get current agent food level
     sfood = nrsp.food;                      %remaining food of the sapling
     cpos=round(pos);                        %round up position to nearest grid point
