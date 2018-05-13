@@ -15,13 +15,15 @@ function create_messages(nt,nr,nf,agent)
  
  for an=1:length(agent)
      if isa(agent{an},'fir_tree')
-        MESSAGES.attype(an)=1;
+        MESSAGES.attype(an)=3;
         MESSAGES.pos(an,:)=get(agent{an},'pos');
+        MESSAGES.food(an,:)=get(agent{an},'food');
      elseif isa(agent{an},'elk')
-        MESSAGES.atype(an)=2;
+        MESSAGES.atype(an)=1;
         MESSAGES.pos(an,:)=get(agent{an},'pos');
+        MESSAGES.age(an,:)=get(agent{an},'age');
      elseif isa(agent{an},'wolf')
-        MESSAGES.atype(an)=3;
+        MESSAGES.atype(an)=2;
         MESSAGES.pos(an,:)=get(agent{an},'pos');
      else
         MESSAGES.atype(an)=0; 
@@ -29,4 +31,3 @@ function create_messages(nt,nr,nf,agent)
      end
      MESSAGES.dead(an)=0;
  end
-     

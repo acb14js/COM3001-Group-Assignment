@@ -20,7 +20,7 @@ for cn=1:n
     if isa(curr,'elk')|isa(curr,'wolf')
         [curr,eaten]=eat(curr,cn);               %eating rules (elks eat food, wolfes eat elks)
         if eaten==0
-            curr=migrate(curr,cn);              %if no food was eaten, then migrate in search of some
+            curr=migrate(curr,cn,eaten);              %if no food was eaten, then migrate in search of some
         end
         [curr,klld]=die(curr,cn);                %death rule (from starvation or old age)
         if klld==0

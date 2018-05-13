@@ -36,34 +36,34 @@ cfood=agt.food;                     %get current agent food level
 spd=agt.speed;                      %wolf migration speed in units per iteration - this is equal to the food search radius
 hungry=1;
 eaten=0;
-s = 100
+%s = 100;
+
+%nrelk = 0;
 
 typ=MESSAGES.atype;                                         %extract types of all agents
 rb=find(typ==1);                                            %indices of all elks
 rpos=MESSAGES.pos(rb,:);                                     %extract positions of all elks
 csep=sqrt((rpos(:,1)-pos(:,1)).^2+(rpos(:,2)-pos(:,2)).^2);  %calculate distance to all elks
 [d,ind]=min(csep);                                            %d is distance to closest elk, ind is index of that elk
-nrst=rb(ind);                                                %index of nearest elk(s)
+nrst=rb(ind);                                                 %index of nearest elk(s)
+
 
 if d<=spd&length(nrst)>0    %if there is at least one  elk within the search radius        
-    if length(nrst)>1       %if more than one elk located at same distance then choose the youngest
-        for elm = nrst
-            if elm.age <= s
-               nrelk=elm;    
-            end
-        end
+    if length(nrst)>1       %if more than one rabbit located at same distance then randomly pick one to head towards
+        s=round(rand*(length(nrst)-1))+1;
+        nrst=nrst(s);
     end
     pk=1-(d/spd);                       %probability that wolf will kill elk is ratio of speed to distance
     if pk>rand
-        nx=MESSAGES.pos(nrelk,1);    %extract exact location of this elk
-        ny=MESSAGES.pos(nrelk,2);
-        npos=[nx ny];    
+        nx=MESSAGES.pos(nrst,1);    %extract exact location of this elk
+        ny=MESSAGES.pos(nrst,2);
+        npos=[nx ny];
         agt.food=cfood+1;           %increase agent food by one unit
         agt.pos=npos;               %move agent to position of this elk
         IT_STATS.eaten(N_IT+1)=IT_STATS.eaten(N_IT+1)+1;                %update model statistics
         eaten=1;
         hungry=0;
-        MESSAGES.dead(nreld)=1;       %send message to elk so it knows it's dead!
+        MESSAGES.dead(nrst)=1;       %send message to elk so it knows it's dead!
     end
 end
 if hungry==1

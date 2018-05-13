@@ -22,19 +22,20 @@ tloc=(bm_size-1)*rand(nt,2)+1;      %generate random initial positions for fir t
 rloc=(bm_size-1)*rand(nr,2)+1;      %generate random initial positions for elks
 floc=(bm_size-1)*rand(nf,2)+1;      %generate random initial positions for wolfes
 
-%rgen=();
-%fgen=();
+gen=randi([0 1],1,nt+nr+nf);
 
 MESSAGES.pos=[rloc;floc;tloc];
+MESSAGES.gen=[gen];
 
 %generate all fir_tree agents and record their positions in ENV_MAT_R
 for t=1:nt
     pos=tloc(t,:);
     %create fir_tree agents with random ages between 0 and 10 days and random
     %food levels 20-40
+    food = 10;
     age=ceil(rand*10);
     lbreed=round(rand*PARAM.R_BRDFQ);
-    agent{t}=fir_tree(age,pos,lbreed);
+    agent{t}=fir_tree(age,pos,lbreed,food);
 end
 
 %generate all elk agents and record their positions in ENV_MAT_R

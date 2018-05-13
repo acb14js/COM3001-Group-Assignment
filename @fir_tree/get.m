@@ -8,8 +8,11 @@ case 'age'
 case 'pos'
     val=c.pos;
 case 'last_breed'
-    val=c.last_breed; 
+    val=c.last_breed;
+case 'food'
+    val = c.food;
 otherwise
     error('invalid field name')
 end
+
 

@@ -25,13 +25,14 @@ el=find(typ==1);
 gen=MESSAGES.gen(el);
 elgen=find(gen==1);
 elpos=MESSAGES.pos(elgen,:);
+relpos=round(elpos);
+mate=find(relpos==cpos)
 
-if cfood>=flim&last_breed==0&age>(365*3)&~isempty(elpos)  %if food > threshold and age > interval, then create offspring
+if cfood>=flim&last_breed==0&age>(365*3)&mate>1  %if food > threshold and age > interval, then create offspring
    agt.last_breed=1;
-   agt.age=age+1;
 end
 if agt.last_breed > 1
-    new=[];
+
     if agt.last_breed == tlim
         agt.last_breed=0;
         agt.food=cfood/2;                          %divide food level between 2 agents
@@ -39,4 +40,7 @@ if agt.last_breed > 1
         IT_STATS.div_r(N_IT+1)=IT_STATS.div_r(N_IT+1)+1;             %update statistics
     end
     agt.last_breed = agt.last_breed + 1;
+else
+    new=[];
+    agt.age=age+1;
 end
