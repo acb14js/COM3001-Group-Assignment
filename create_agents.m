@@ -24,22 +24,26 @@ MESSAGES.pos=[rloc;floc];
 
 %generate all elk agents and record their positions in ENV_MAT_R
 for r=1:nr
-    pos=rloc(r,:);
+    prand=randi([1, nr], 1); %pick random point to get a random position for the elks
+    pos=rloc(prand,:);
     %create elk agents with random ages between 0 and 10 days and random
     %food levels 20-40
     age=ceil(rand*10);
     food=ceil(rand*20)+20;
     lbreed=round(rand*PARAM.R_BRDFQ);
-    agent{r}=elk(age,food,pos,PARAM.R_SPD,lbreed);
+    gender = randi([0, 1], 1);
+    agent{r}=elk(age,food,pos,PARAM.R_SPD,lbreed,gender);
 end
 
 %generate all wolf agents and record their positions in ENV_MAT_F
 for f=nr+1:nr+nf
-    pos=floc(f-nr,:);
+    prand=randi([1, nr], 1);%pick a random number to get a random position for the wolf
+    pos=floc(f-prand,:);
     %create wolf agents with random ages between 0 and 10 days and random
     %food levels 20-40
     age=ceil(rand*10);
     food=ceil(rand*20)+20;
     lbreed=round(rand*PARAM.F_BRDFQ);
-    agent{f}=wolf(age,food,pos,PARAM.F_SPD,lbreed);
+    gender=randi([0, 1], 1);
+    agent{f}=wolf(age,food,pos,PARAM.F_SPD,lbreed,gender);
 end

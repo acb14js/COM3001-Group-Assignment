@@ -5,7 +5,7 @@ classdef elk   %declares elk object
         pos;
         speed;
         last_breed;
-        %gender;
+        gender;
     end
     methods                         %note that this class definition mfile contains only the constructor method!
                                     %all additional member functions associated with this class are included as separate mfiles in the @elk folder. 
@@ -26,7 +26,7 @@ classdef elk   %declares elk object
                        r.pos=[];
                        r.speed=[];
                        r.last_breed=[];
-                       %r.gender=[];
+                       r.gender=[];
                     case 1              %input is already a elk, so just return!
                        if (isa(varargin{1},'elk'))		
                             r=varargin{1};
@@ -40,7 +40,7 @@ classdef elk   %declares elk object
                        r.pos=varargin{3};               %current position in Cartesian co-ords [x y]
                        r.speed=varargin{4};             %number of kilometres elk can migrate in 1 day
                        r.last_breed=varargin{5};        %number of iterations since elk last reproduced.
-                      % r.gender=varargin{6};
+                       r.gender=varargin{6};
                     otherwise
                        error('Invalid no. of input arguments')
                 end
