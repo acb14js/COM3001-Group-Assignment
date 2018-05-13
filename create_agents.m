@@ -20,19 +20,21 @@ bm_size=ENV_DATA.bm_size;
 rloc=(bm_size-1)*rand(nr,2)+1;      %generate random initial positions for elks
 floc=(bm_size-1)*rand(nf,2)+1;      %generate random initial positions for wolfes
 
+rgen=()
+fgen=()
+
 MESSAGES.pos=[rloc;floc];
 
 %generate all elk agents and record their positions in ENV_MAT_R
-for r=1:nr
+for rf=1:nr
     prand=randi([1, nr], 1); %pick random point to get a random position for the elks
     pos=rloc(prand,:);
     %create elk agents with random ages between 0 and 10 days and random
     %food levels 20-40
     age=ceil(rand*10);
     food=ceil(rand*20)+20;
-    gender = randi([0, 1], 1);
     lbreed=0;
-    agent{r}=elk(age,food,pos,PARAM.R_SPD,lbreed,gender);
+    agent{r}=elk(age,food,pos,PARAM.R_SPD,lbreed);
 end
 
 %generate all wolf agents and record their positions in ENV_MAT_F
@@ -44,6 +46,5 @@ for f=nr+1:nr+nf
     age=ceil(rand*10);
     food=ceil(rand*20)+20;
     lbreed=0;
-    gender=randi([0, 1], 1);
-    agent{f}=wolf(age,food,pos,PARAM.F_SPD,lbreed,gender);
+    agent{f}=wolf(age,food,pos,PARAM.F_SPD,lbreed);
 end
