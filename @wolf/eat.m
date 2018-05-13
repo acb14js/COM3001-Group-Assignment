@@ -67,7 +67,7 @@ if d<=spd&length(nrst)>0    %if there is at least one  elk within the search rad
     end
 end
 if hungry==1
-    agt.food=cfood-1;     %if no food, then reduce agent food by one unit
+    agt.food=cfood-0.2;     %if no food, then reduce agent food by 0.2
 end
 
 

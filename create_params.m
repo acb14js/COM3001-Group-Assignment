@@ -8,9 +8,9 @@ function create_params
 
 global PARAM
 
-    PARAM.R_SPD=2;         %speed of movement - units per itn (elk)
+    PARAM.R_SPD=4;         %speed of movement - units per itn (elk)
     PARAM.F_SPD=5;         %speed of movement - units per itn (wolf)
-    PARAM.R_BRDFQ=10;      %breeding frequency - iterations
+    PARAM.R_BRDFQ=250;      %breeding frequency - iterations
     PARAM.F_BRDFQ=20;
     PARAM.R_MINFOOD=0;      %minimum food threshold before agent dies 
     PARAM.F_MINFOOD=0;
