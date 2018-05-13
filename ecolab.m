@@ -34,10 +34,10 @@ function ecolab(fmode,outImages)
 
     global N_IT IT_STATS ENV_DATA CONTROL_DATA
 
-    if nargin == 4
+    if nargin == 0
         fmode=true;
         outImages=false;
-    elseif nargin == 5
+    elseif nargin == 1
         outImages=false;
     end
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
