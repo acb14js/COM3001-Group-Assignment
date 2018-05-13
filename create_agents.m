@@ -24,7 +24,7 @@ floc=(bm_size-1)*rand(nf,2)+1;      %generate random initial positions for wolfe
 
 gen=randi([0 1],1,nt+nr+nf);
 
-MESSAGES.pos=[rloc;floc;tloc];
+MESSAGES.pos=[tloc:rloc;floc];
 MESSAGES.gen=[gen];
 
 %generate all fir_tree agents and record their positions in ENV_MAT_R

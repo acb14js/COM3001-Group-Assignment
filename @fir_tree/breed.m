@@ -12,7 +12,7 @@ last_breed=agt.last_breed;  %length of time since agent last reproduced
 pos=agt.pos;                %current position
 
 if last_breed>=tlim  %if age > interval, then create offspring
-   new=fir_tree(0,pos,0);   %new fir_tree agent
+   new=fir_tree(0,pos,0,50);   %new fir_tree agent
    agt.last_breed=0;
    agt.age=age+1;
    IT_STATS.div_t(N_IT+1)=IT_STATS.div_t(N_IT+1)+1;             %update statistics

@@ -10,8 +10,10 @@ global IT_STATS N_IT MESSAGES
 
 klld=0;
 cfood = cell2mat(agt.food);
+%age=agt.age
 
 if cfood==0
+%if age>PARAM.F_MAXAGE
     IT_STATS.died_t(N_IT+1)=IT_STATS.died_t(N_IT+1)+1;  %update statistics
     MESSAGES.dead(cn)=1;                %update message list
     klld=1;
