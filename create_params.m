@@ -10,13 +10,13 @@ global PARAM
 
     PARAM.R_SPD=4;         %speed of movement - units per itn (elk)
     PARAM.F_SPD=5;         %speed of movement - units per itn (wolf)
+    PARAM.T_BRDFQ=365;       %may need change 
     PARAM.R_BRDFQ=250;      %breeding frequency - iterations
-    PARAM.F_BRDFQ=20;
+    PARAM.F_BRDFQ=63;
     PARAM.R_MINFOOD=0;      %minimum food threshold before agent dies 
     PARAM.F_MINFOOD=0;
     PARAM.R_FOODBRD=10;     %minimum food threshold for breeding
     PARAM.F_FOODBRD=10;
-    PARAM.R_MAXAGE=5849;      %maximum age allowed for elk 
-    PARAM.F_MAXAGE=4562.5;      %maximum age allowd for wolves
-    
-    
+    PARAM.T_MAXAGE=50;      %may need change
+    PARAM.R_MAXAGE=(365*16);      %maximum age allowed 
+    PARAM.F_MAXAGE=(365*12.5);
