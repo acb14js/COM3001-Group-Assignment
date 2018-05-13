@@ -62,7 +62,11 @@ if ~isempty(xf)
     dotter = dot(compare, [xa,ya], 2);
     
     csep=sqrt((xa-pos(:,1)).^2+(ya-pos(:,2)).^2);   %calculate distance to all food
+    
     [d,nrst]=min(csep);     %d is distance to closest food, nrst is index of that food
+    
+    [dtmp,nrsttmp]=min(times(csep,dotter*1000))
+    
     if d<=spd       %if there is at least one lot of food within the search radius        
         if length(nrst)>1       %if more lot of food located at same distance then randomly pick one to head towards
             s=round(rand*(length(nrst)-1))+1;
