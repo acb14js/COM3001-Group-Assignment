@@ -43,9 +43,9 @@ spd=agt.speed;                       %elk migration speed in units per iteration
 typ=MESSAGES.atype;
 el=find(typ==1);
 find(el)
-rpos=MESSAGES.pos(rb,:);                                     %extract positions of all elks
-eltotal = length(el)
 
+rpos=MESSAGES.pos(rb,:);                                     %extract positions of all elks
+eltotal = length(el);
 elpos=MESSAGES.pos(el,:);                                     %extract positions of all elks
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
