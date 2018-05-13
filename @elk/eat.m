@@ -26,18 +26,20 @@ function [agt,eaten,flee]=eat(agt,cn)
 global  ENV_DATA MESSAGES
 
 pos=agt.pos;                            %extract current position 
+cpos=round(pos);                        %round up position to nearest grid point
 
 typ=MESSAGES.atype;                                         %extract types of all agents
 sp=find(typ==3);                                            %indices of all splings
 wo = find(typ==2);
 rpos=MESSAGES.pos(sp,:);                                    %extract positions of all sapling
+rpos=round(rpos);
 wpos = MESSAGES.pos(wo,:);
+wpos=round(wpos);
 iw = find(wpos == pos);
 isa = find(rpos == pos);
 cfood=agt.food;                                               %get current agent food level
 
 if isempty(iw)     
-    cpos=round(pos);                        %round up position to nearest grid point
     pfood=ENV_DATA.food(cpos(1),cpos(2));   %obtain environment food level at current location
 
     if ~isempty(isa)                         %if there is a sapling at the positon
@@ -58,7 +60,7 @@ if isempty(iw)
     end
 else    
    agt.food=cfood-1;                   
-    eaten=0;    
+    eaten=-1;    
 end
     
    

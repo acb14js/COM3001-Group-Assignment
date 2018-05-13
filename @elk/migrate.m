@@ -1,4 +1,4 @@
-function [agt]=migrate(agt,cn,flee)
+function [agt]=migrate(agt,cn,eaten)
 
 %migration functions for class elk
 %agt=elk object
@@ -42,7 +42,7 @@ spd=agt.speed;                       %elk migration speed in units per iteration
 
 typ=MESSAGES.atype;
 el=find(typ==1);
-find(el)
+rb=find(el)
 
 rpos=MESSAGES.pos(rb,:);                                     %extract positions of all elks
 eltotal = length(el);
@@ -52,15 +52,13 @@ elpos=MESSAGES.pos(el,:);                                     %extract positions
 mig=0;                          %flag will be reset to one if elk migrates
 [xf,yf]=find(loc_food);        %extract all rows (=x) and columns (=y) of food matrix where food is present
 
-if ~isempty(xf)&flee~=0
+if ~isempty(xf)&eaten~=-1
     xa=xmin+xf-1;                  %x co-ordiantes of all squares containing food
     ya=ymin+yf-1;                  %y co-ordiantes of all squares containing food
 
     csep=sqrt((xa-pos(:,1)).^2+(ya-pos(:,2)).^2);   %calculate distance to all food
 
     [d,nrst]=min(csep);     %d is distance to closest food, nrst is index of that food
-
-    [dtmp,nrsttmp]=min(times(csep,dotter*1000))
 
     if d<=spd       %if there is at least one lot of food within the search radius
         if length(nrst)>1       %if more lot of food located at same distance then randomly pick one to head towards
