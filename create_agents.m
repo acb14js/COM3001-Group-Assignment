@@ -1,10 +1,11 @@
-function [agent]=create_agents(nr,nf)
+function [agent]=create_agents(nt,nr,nf)
 
  %creates the objects representing each agent
  
 %agent - cell array containing list of objects representing agents
 %nr - number of elks
 %nf - number of wolfes
+%nt - number of fir trees
 
 %global parameters
 %ENV_DATA - data structure representing the environment (initialised in
@@ -14,17 +15,28 @@ function [agent]=create_agents(nr,nf)
 %PARAM - structure containing values of all parameters governing agent
 %behaviour for the current simulation
  
- global ENV_DATA MESSAGES PARAM 
+global ENV_DATA MESSAGES PARAM 
   
 bm_size=ENV_DATA.bm_size;
+tloc=(bm_size-1)*rand(nt,2)+1;      %generate random initial positions for fir trees
 rloc=(bm_size-1)*rand(nr,2)+1;      %generate random initial positions for elks
 floc=(bm_size-1)*rand(nf,2)+1;      %generate random initial positions for wolfes
 
-MESSAGES.pos=[rloc;floc];
+MESSAGES.pos=[rloc;floc;tloc];
+
+%generate all fir_tree agents and record their positions in ENV_MAT_R
+for t=1:nt
+    pos=tloc(t,:);
+    %create fir_tree agents with random ages between 0 and 10 days and random
+    %food levels 20-40
+    age=ceil(rand*10);
+    lbreed=round(rand*PARAM.R_BRDFQ);
+    agent{t}=fir_tree(age,pos,lbreed);
+end
 
 %generate all elk agents and record their positions in ENV_MAT_R
-for r=1:nr
-    pos=rloc(r,:);
+for r=nt+1:nt+nr
+    pos=rloc(r-nt,:);
     %create elk agents with random ages between 0 and 10 days and random
     %food levels 20-40
     age=ceil(rand*10);
@@ -34,8 +46,8 @@ for r=1:nr
 end
 
 %generate all wolf agents and record their positions in ENV_MAT_F
-for f=nr+1:nr+nf
-    pos=floc(f-nr,:);
+for f=nt+nr+1:nt+nr+nf
+    pos=floc(f-nr-nt,:);
     %create wolf agents with random ages between 0 and 10 days and random
     %food levels 20-40
     age=ceil(rand*10);

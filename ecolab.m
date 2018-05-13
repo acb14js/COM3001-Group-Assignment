@@ -1,4 +1,4 @@
-function ecolab(size,nr,nf,nsteps,fmode,outImages)
+  function ecolab(size,nt,nr,nf,nsteps,fmode,outImages)
 
 %ECO_LAB  agent-based predator-prey model, developed for
 %demonstration purposes only for University of Sheffield module
@@ -39,9 +39,9 @@ function ecolab(size,nr,nf,nsteps,fmode,outImages)
     create_params;                      %sets the parameters for this simulation
     create_environment(size);           %creates environment data structure, given an environment size
     random_selection(1);                %randomises random number sequence (NOT agent order). If input=0, then simulation should be identical to previous for same initial values
-    [agent]=create_agents(nr,nf);       %create nr elk and nf wolf agents and places them in a cell array called 'agents'
-    create_messages(nr,nf,agent);       %sets up the initial message lists
-    initialise_results(nr,nf,nsteps);   %initilaises structure for storing results
+    [agent]=create_agents(nt,nr,nf);       %create nr elk and nf wolf agents and places them in a cell array called 'agents'
+    create_messages(nt,nr,nf,agent);       %sets up the initial message lists
+    initialise_results(nt,nr,nf,nsteps);   %initilaises structure for storing results
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %MODEL EXECUTION
     for n_it=1:nsteps                   %the main execution loop
@@ -69,5 +69,6 @@ function ecolab(size,nr,nf,nsteps,fmode,outImages)
             end
         end
     end
-eval(['save results_nr_' num2str(nr) '_nf_' num2str(nf) '.mat IT_STATS ENV_DATA' ]);
+%eval(['save results_nr_' num2str(nr) '_nf_' num2str(nf) '.mat IT_STATS ENV_DATA' ]);
+eval(['save results_nt_' num2str(nt) '_nr_' num2str(nr) '_nf_' num2str(nf) '.mat IT_STATS ENV_DATA' ]);
 clear global

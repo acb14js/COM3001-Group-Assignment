@@ -1,4 +1,4 @@
-function create_messages(nr,nf,agent)
+function create_messages(nt,nr,nf,agent)
 
 %function that populates the global data structure representing
 %message information
@@ -14,11 +14,14 @@ function create_messages(nr,nf,agent)
  global MESSAGES
  
  for an=1:length(agent)
-     if isa(agent{an},'elk')
-        MESSAGES.atype(an)=1;
+     if isa(agent{an},'fir_tree')
+        MESSAGES.attype(an)=1;
+        MESSAGES.pos(an,:)=get(agent{an},'pos');
+     elseif isa(agent{an},'elk')
+        MESSAGES.atype(an)=2;
         MESSAGES.pos(an,:)=get(agent{an},'pos');
      elseif isa(agent{an},'wolf')
-        MESSAGES.atype(an)=2;
+        MESSAGES.atype(an)=3;
         MESSAGES.pos(an,:)=get(agent{an},'pos');
      else
         MESSAGES.atype(an)=0; 
