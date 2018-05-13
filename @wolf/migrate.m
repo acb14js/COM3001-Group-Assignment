@@ -1,4 +1,4 @@
-function [agt]=migrate(agt,cn)
+function [agt]=migrate(agt,cn,flee)
 
 %migration functions for class wolf
 %agt=wolf object

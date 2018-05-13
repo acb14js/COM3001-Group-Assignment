@@ -1,4 +1,4 @@
-function [agt]=migrate(agt,cn,flee)
+function [agt]=migrate(agt,cn, flee)
 
 %migration functions for class elk
 %agt=elk object
@@ -39,19 +39,34 @@ spd=agt.speed;                       %elk migration speed in units per iteration
 %xmin in minimum x co-ord of this area
 %ymin is minimum y co-ord of this area
 [loc_food,xmin,ymin]=extract_local_food(cpos,spd);
-[loc_agt,xamin,yamin] = extract_local_agents(cpos,spd);
 
 typ=MESSAGES.atype;
 el=find(typ==1);
+find(el)
 
-eltotal = length(el)
-elpos=MESSAGES.pos(el,:);                                     %extract positions of all elks
+rpos=MESSAGES.pos(rb,:);                                     %extract positions of all elks
+eltotal = length(el);
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+typ=MESSAGES.atype;                                         %extract types of all agents
+rb=find(typ==1);                                            %indices of all elks
+[loc_elks,xmin,ymin] = extract_local_food(cpos,spd,rb);      %extract positions of all elks
+num_elk = length(loc_elks);
+rand_ind = ceil(randi([0, num_elk], 1));
+x_pos = xmin(rand_ind);
+y_pos = ymin(rand_ind);
+
+if ~isempty(x_pos)&~isempty(y_pos)
+    agt.pos=n_el_pos;
+end
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 mig=0;                          %flag will be reset to one if elk migrates
 [xf,yf]=find(loc_food);        %extract all rows (=x) and columns (=y) of food matrix where food is present
-if ~isempty(xf)&flee==0
+
+if ~isempty(xf)
     xa=xmin+xf-1;                  %x co-ordiantes of all squares containing food
     ya=ymin+yf-1;                  %y co-ordiantes of all squares containing food
 
@@ -78,7 +93,7 @@ if ~isempty(xf)&flee==0
     end
 end
 
-if mig==0                                  %elk has been unable to find food, so chooses a random direction to move in
+if mig==0&flee==1                                  %elk has been unable to find food, so chooses a random direction to move in
     cnt=1;
     dir=rand*2*pi;
     while mig==0&cnt<=8

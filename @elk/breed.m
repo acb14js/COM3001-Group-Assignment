@@ -5,7 +5,7 @@ function [agt, new]=breed(agt,cn)
 %cn - current agent number
 %new - contains new  agent object if created, otherwise empty
 
-global PARAM IT_STATS N_IT 
+global PARAM IT_STATS N_IT MESSAGES
 %N_IT is current iteration number
 %IT_STATS is data structure containing statistics on model at each
 %iteration (no. agents etc)
@@ -18,17 +18,25 @@ cfood=agt.food;              %get current agent food level
 age=agt.age;                %get current agent age
 last_breed=agt.last_breed;  %length of time since agent last reproduced
 pos=agt.pos;         %current position
+cpos=round(pos);                     %round up position to nearest grid point
 
-if cfood>=flim&last_breed>tlim&age>(365*3)  %if food > threshold and age > interval, then create offspring
-   agt.food=cfood/2;                          %divide food level between 2 agents
+typ=MESSAGES.atype;
+el=find(typ==1);
+gen=MESSAGES.gen(el);
+elgen=find(gen==1);
+elpos=MESSAGES.pos(elgen,:);
+
+if cfood>=flim&last_breed==0&age>(365*3)&~isempty(elpos)  %if food > threshold and age > interval, then create offspring
    agt.last_breed=1;
    agt.age=age+1;
-   IT_STATS.div_r(N_IT+1)=IT_STATS.div_r(N_IT+1)+1;             %update statistics
-else                            
-    agt.age=age+1;                          %not able to breed, so increment age by 1
-    if agt.last_breed > 1
-      agt.last_breed = agt.last_breed + 1
-    if agt.last_breed == tlim
-         new=elk(0,cfood/2,pos,PARAM.R_SPD,0);   %new rabbit agent
+end
+if agt.last_breed > 1
     new=[];
+    if agt.last_breed == tlim
+        agt.last_breed=0;
+        agt.food=cfood/2;                          %divide food level between 2 agents
+        new=elk(0,cfood/2,pos,PARAM.R_SPD,0);   %new rabbit agent
+        IT_STATS.div_r(N_IT+1)=IT_STATS.div_r(N_IT+1)+1;             %update statistics
+    end
+    agt.last_breed = agt.last_breed + 1;
 end
