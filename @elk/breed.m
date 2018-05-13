@@ -19,13 +19,16 @@ age=agt.age;                %get current agent age
 last_breed=agt.last_breed;  %length of time since agent last reproduced
 pos=agt.pos;         %current position
 
-if cfood>=flim&last_breed>=tlim&age>(365*3)  %if food > threshold and age > interval, then create offspring
-   new=elk(0,cfood/2,pos,PARAM.R_SPD,0);   %new rabbit agent
+if cfood>=flim&last_breed>tlim&age>(365*3)  %if food > threshold and age > interval, then create offspring
    agt.food=cfood/2;                          %divide food level between 2 agents
-   agt.last_breed=last_breed+1;
+   agt.last_breed=1;
    agt.age=age+1;
    IT_STATS.div_r(N_IT+1)=IT_STATS.div_r(N_IT+1)+1;             %update statistics
 else                            
     agt.age=age+1;                          %not able to breed, so increment age by 1
+    if agt.last_breed > 1
+      agt.last_breed = agt.last_breed + 1
+    if agt.last_breed == tlim
+         new=elk(0,cfood/2,pos,PARAM.R_SPD,0);   %new rabbit agent
     new=[];
 end

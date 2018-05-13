@@ -30,8 +30,8 @@ for r=1:nr
     %food levels 20-40
     age=ceil(rand*10);
     food=ceil(rand*20)+20;
-    lbreed=round(rand*PARAM.R_BRDFQ);
     gender = randi([0, 1], 1);
+    lbreed=0;
     agent{r}=elk(age,food,pos,PARAM.R_SPD,lbreed,gender);
 end
 
@@ -43,7 +43,7 @@ for f=nr+1:nr+nf
     %food levels 20-40
     age=ceil(rand*10);
     food=ceil(rand*20)+20;
-    lbreed=round(rand*PARAM.F_BRDFQ);
+    lbreed=0;
     gender=randi([0, 1], 1);
     agent{f}=wolf(age,food,pos,PARAM.F_SPD,lbreed,gender);
 end
