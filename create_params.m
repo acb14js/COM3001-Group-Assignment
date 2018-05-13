@@ -16,7 +16,7 @@ global PARAM
     PARAM.F_MINFOOD=0;
     PARAM.R_FOODBRD=10;     %minimum food threshold for breeding
     PARAM.F_FOODBRD=10;
-    PARAM.R_MAXAGE=50;      %maximum age allowed 
-    PARAM.F_MAXAGE=50;
+    PARAM.R_MAXAGE=5849;      %maximum age allowed for elk 
+    PARAM.F_MAXAGE=4562.5;      %maximum age allowd for wolves
     
     
