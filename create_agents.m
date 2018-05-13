@@ -32,7 +32,7 @@ for t=1:nt
     pos=tloc(t,:);
     %create fir_tree agents with random ages between 0 and 10 days and random
     %food levels 20-40
-    food = 10;
+    food = 50;
     age=ceil(rand*10);
     lbreed=round(rand*PARAM.R_BRDFQ);
     agent{t}=fir_tree(age,pos,lbreed,food);

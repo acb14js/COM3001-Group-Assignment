@@ -26,11 +26,11 @@ function ecolab(fmode,outImages)
     clear global
     close all
 
-    nsteps = 3650; % 10 year period of study.
+    nsteps = 5; % 10 year period of study.
     size = 95; % 100km squared size of yellowstone
     nr = 1300; % 130:4 ratio of elk to wolves
     nf = 40;
-    nt = 75;
+    nt = 100;
 
     global N_IT IT_STATS ENV_DATA CONTROL_DATA
 
