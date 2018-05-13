@@ -21,15 +21,15 @@ function plot_results(agent,nsteps,fmode,outImages)
     %broadcast to each other
 
     %write results to the screen
-    nt=IT_STATS.tot_t;
+    %nt=IT_STATS.tot_t;
     nr=IT_STATS.tot_r;
     nf=IT_STATS.tot_f;
     disp(strcat('Iteration = ',num2str(N_IT)))
-    disp(strcat('No. new fir trees = ',num2str(IT_STATS.div_t(N_IT+1))))
+    %disp(strcat('No. new fir trees = ',num2str(IT_STATS.div_t(N_IT+1))))
     disp(strcat('No. new elks = ',num2str(IT_STATS.div_r(N_IT+1))))
     disp(strcat('No. new wolfes = ',num2str(IT_STATS.div_f(N_IT+1))))
     disp(strcat('No. agents migrating = ',num2str(IT_STATS.mig(N_IT+1))))
-    disp(strcat('No. fir trees dying = ',num2str(IT_STATS.died_t(N_IT+1))))
+    %disp(strcat('No. fir trees dying = ',num2str(IT_STATS.died_t(N_IT+1))))
     disp(strcat('No. elks dying = ',num2str(IT_STATS.died_r(N_IT+1))))
     disp(strcat('No. wolfes dying = ',num2str(IT_STATS.died_f(N_IT+1))))
     disp(strcat('No. elks eaten = ',num2str(IT_STATS.eaten(N_IT+1))))
@@ -43,10 +43,11 @@ function plot_results(agent,nsteps,fmode,outImages)
 
         col{1}='r-';                   %set up colours that will represent different cell types red for elks, blue for wolfes
         col{2}='b-';
-        col{3}='g-';
+        %col{3}='g-';
 
         tot_food=IT_STATS.tfood;       %total food remaining
-        n=nt(N_IT+1)+nr(N_IT+1)+nf(N_IT+1);             %current agent number
+        %n=nt(N_IT+1)+nr(N_IT+1)+nf(N_IT+1);             %current agent number
+        n=nr(N_IT+1)+nf(N_IT+1);
         f2=figure(2);
         set(f2,'Units','Normalized');
         set(f2,'Position',[0.5 0.5 0.45 0.4]);
@@ -58,11 +59,14 @@ function plot_results(agent,nsteps,fmode,outImages)
         subplot(3,1,2),plot((1:N_IT+1),nf(1:N_IT+1),col{2});
         subplot(3,1,2),axis([0 nsteps 0 1.1*max(nf)]);
         subplot(3,1,3),cla
-        subplot(3,1,3),plot((1:N_IT+1),nt(1:N_IT+1),col{3});
-        subplot(3,1,3),axis([0 nsteps 0 1.1*max(nt)]);
+        %subplot(3,1,3),plot((1:N_IT+1),nt(1:N_IT+1),col{3});
+        %subplot(3,1,3),axis([0 nsteps 0 1.1*max(nt)]);
+        subplot(3,1,3),plot((1:N_IT+1),tot_food(1:N_IT+1),'m-');
+        subplot(3,1,3),axis([0 nsteps 0 tot_food(1)]);
         subplot(3,1,1),title('No. live elks');
         subplot(3,1,2),title('No. live wolfes');
-        subplot(3,1,3),title('NO. live fir trees');
+        %subplot(3,1,3),title('NO. live fir trees');
+        subplot(3,1,3),title('Total food');
         drawnow
 
         %create plot of agent locations. 
@@ -93,9 +97,9 @@ function plot_results(agent,nsteps,fmode,outImages)
                 elseif isa (agent{cn},'wolf')   
                     fo=plot(pos(1),pos(2),'b.'); 
                     set(fo,'MarkerSize',30);
-                elseif isa (agent{cn},'fir_tree')
-                    so=plot(pos(1),pos(2),'g');
-                    set(so,'MarkerSize',35);
+                %elseif isa (agent{cn},'fir_tree')
+                %    so=plot(pos(1),pos(2),'g.');
+                %    set(so,'MarkerSize',40);
                 end
             end
         end

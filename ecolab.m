@@ -25,15 +25,13 @@ function ecolab(fmode,outImages)
     %clear any global variables/ close figures from previous simulations
     clear global
     close all
-
-    nsteps = 5; % 10 year period of study.
-
+    
     nsteps = 3650; % 10 year period of study.
 
     size = 95; % 100km squared size of yellowstone
     nr = 1300; % 130:4 ratio of elk to wolves
     nf = 40;
-    nt = 100;
+    %nt = 100;
 
     global N_IT IT_STATS ENV_DATA CONTROL_DATA
 
@@ -49,10 +47,13 @@ function ecolab(fmode,outImages)
     create_params;                      %sets the parameters for this simulation
     create_environment(size);           %creates environment data structure, given an environment size
     random_selection(1);                %randomises random number sequence (NOT agent order). If input=0, then simulation should be identical to previous for same initial values
-    [agent]=create_agents(nt,nr,nf);       %create nr elk and nf wolf agents and places them in a cell array called 'agents'
-    create_messages(nt,nr,nf,agent);       %sets up the initial message lists
-    initialise_results(nt,nr,nf,nsteps);   %initilaises structure for storing results
-
+    %[agent]=create_agents(nt,nr,nf);       %create nr elk and nf wolf agents and places them in a cell array called 'agents'
+    [agent]=create_agents(nr,nf); 
+    %create_messages(nt,nr,nf,agent);       %sets up the initial message lists
+    create_messages(nr,nf,agent);
+    %initialise_results(nt,nr,nf,nsteps);   %initilaises structure for storing results
+    initialise_results(nr,nf,nsteps);
+    
     %MODEL EXECUTION
     for n_it=1:nsteps                   %the main execution loop
         N_IT=n_it;
@@ -79,6 +80,6 @@ function ecolab(fmode,outImages)
             end
         end
     end
-%eval(['save results_nr_' num2str(nr) '_nf_' num2str(nf) '.mat IT_STATS ENV_DATA' ]);
-eval(['save results_nt_' num2str(nt) '_nr_' num2str(nr) '_nf_' num2str(nf) '.mat IT_STATS ENV_DATA' ]);
+eval(['save results_nr_' num2str(nr) '_nf_' num2str(nf) '.mat IT_STATS ENV_DATA' ]);
+%eval(['save results_nt_' num2str(nt) '_nr_' num2str(nr) '_nf_' num2str(nf) '.mat IT_STATS ENV_DATA' ]);
 clear global
