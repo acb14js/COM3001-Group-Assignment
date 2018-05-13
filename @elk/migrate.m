@@ -14,7 +14,7 @@ function [agt]=migrate(agt,cn)
 %If no food is detected within its search radius it will move randomly (up
 %to 8 atempts without leaving the model edge)
 
-global ENV_DATA IT_STATS N_IT MESSAGES 
+global ENV_DATA IT_STATS N_IT MESSAGES
 %N_IT is current iteration number
 %IT_STATS is data structure containing statistics on model at each
 %iteration (no. agents etc)
@@ -28,8 +28,8 @@ global ENV_DATA IT_STATS N_IT MESSAGES
    %    of food
 
 mig=0;                               %indicates whether elk has successfully migrated
-pos=agt.pos;                         %extract current position 
-cpos=round(pos);                     %round up position to nearest grid point   
+pos=agt.pos;                         %extract current position
+cpos=round(pos);                     %round up position to nearest grid point
 spd=agt.speed;                       %elk migration speed in units per iteration - this is equal to the food search radius
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -41,33 +41,27 @@ spd=agt.speed;                       %elk migration speed in units per iteration
 [loc_food,xmin,ymin]=extract_local_food(cpos,spd);
 
 typ=MESSAGES.atype;
-el=find(typ==1);      
+el=find(typ==1);
+
+eltotal = length(el)
+
 elpos=MESSAGES.pos(el,:);                                     %extract positions of all elks
-csep_elk=sqrt((elpos(:,1)-pos(:,1)).^2+(elpos(:,2)-pos(:,2)).^2);  %calculate distance to all elks
-[d_elk,ind_elk]=min(csep_elk);                                            %d is distance to closest elk, ind is index of that elk
-nrst_elk = el(ind_elk);		% Calculate the position of the nearest elk, THIS SHOULD BE XY
-nelx=MESSAGES.pos(nrst_elk,1);    %extract exact location of this elk
-nely=MESSAGES.pos(nrst_elk,2);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 mig=0;                          %flag will be reset to one if elk migrates
 [xf,yf]=find(loc_food);        %extract all rows (=x) and columns (=y) of food matrix where food is present
 
-compare = kron([nelx,nely],ones(size(xf,1),1));
-
-if ~isempty(xf)      
+if ~isempty(xf)
     xa=xmin+xf-1;                  %x co-ordiantes of all squares containing food
     ya=ymin+yf-1;                  %y co-ordiantes of all squares containing food
-    
-    dotter = dot(compare, [xa,ya], 2);
-    
+
     csep=sqrt((xa-pos(:,1)).^2+(ya-pos(:,2)).^2);   %calculate distance to all food
-    
+
     [d,nrst]=min(csep);     %d is distance to closest food, nrst is index of that food
-    
+
     [dtmp,nrsttmp]=min(times(csep,dotter*1000))
-    
-    if d<=spd       %if there is at least one lot of food within the search radius        
+
+    if d<=spd       %if there is at least one lot of food within the search radius
         if length(nrst)>1       %if more lot of food located at same distance then randomly pick one to head towards
             s=round(rand*(length(nrst)-1))+1;
             nrst=nrst(s);
@@ -83,11 +77,11 @@ if ~isempty(xf)
         mig=1;
     end
 end
-    
-if mig==0                                   %elk has been unable to find food, so chooses a random direction to move in      
+
+if mig==0                                   %elk has been unable to find food, so chooses a random direction to move in
     cnt=1;
-    dir=rand*2*pi;              
-    while mig==0&cnt<=8                     
+    dir=rand*2*pi;
+    while mig==0&cnt<=8
         npos(1)=pos(1)+spd*cos(dir);        %new x co-ordinate
         npos(2)=pos(2)+spd*sin(dir);        %new y co-ordinate
         if npos(1)<ENV_DATA.bm_size&npos(2)<ENV_DATA.bm_size&npos(1)>=1&npos(2)>=1   %check that wolf has not left edge of model - correct if so.

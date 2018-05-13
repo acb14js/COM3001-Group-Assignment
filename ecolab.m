@@ -1,4 +1,5 @@
-function ecolab(size,nr,nf,nsteps,fmode,outImages)
+function ecolab(fmode,outImages)
+% function ecolab(size,nr,nf,nsteps,fmode,outImages)
 
 %ECO_LAB  agent-based predator-prey model, developed for
 %demonstration purposes only for University of Sheffield module
@@ -25,6 +26,11 @@ function ecolab(size,nr,nf,nsteps,fmode,outImages)
     clear global
     close all
 
+    nsteps = 3650 % 10 year period of study.
+    size = 95 % 100km squared size of yellowstone
+    nr = 1300 % 130:4 ratio of elk to wolves
+    nf = 40
+
     global N_IT IT_STATS ENV_DATA CONTROL_DATA
 
     if nargin == 4
@@ -39,7 +45,7 @@ function ecolab(size,nr,nf,nsteps,fmode,outImages)
     create_params;                      %sets the parameters for this simulation
     create_environment(size);           %creates environment data structure, given an environment size
     random_selection(1);                %randomises random number sequence (NOT agent order). If input=0, then simulation should be identical to previous for same initial values
-    [agent]=create_agents(nr,nf);       %create nr elk and nf wolf agents and places them in a cell array called 'agents'
+    [agent]=create_agents(nr,nf);       %create elk and wolf agents and places them in a cell array called 'agents'
     create_messages(nr,nf,agent);       %sets up the initial message lists
     initialise_results(nr,nf,nsteps);   %initilaises structure for storing results
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
