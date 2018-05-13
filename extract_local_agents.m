@@ -1,4 +1,4 @@
-function [loc_food,xmin,ymin]=extract_local_food(cpos,spd,typ_flag)
+function [loc_agt,xmin,ymin]=extract_local_agents(cpos,spd,typ_flag)
 
 %Extracts array representing distribution of food available in the local
 %area of an agent at position cpos [x,y] and with search radius =spd.

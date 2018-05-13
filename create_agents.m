@@ -22,10 +22,10 @@ tloc=(bm_size-1)*rand(nt,2)+1;      %generate random initial positions for fir t
 rloc=(bm_size-1)*rand(nr,2)+1;      %generate random initial positions for elks
 floc=(bm_size-1)*rand(nf,2)+1;      %generate random initial positions for wolfes
 
-%rgen=();
-%fgen=();
+gen=randi([0 1],1,nt+nr+nf);
 
 MESSAGES.pos=[rloc;floc;tloc];
+MESSAGES.gen=[gen];
 
 %generate all fir_tree agents and record their positions in ENV_MAT_R
 for t=1:nt

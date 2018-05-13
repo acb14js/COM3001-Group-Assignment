@@ -1,4 +1,4 @@
-function [agt,eaten]=eat(agt,cn)
+function [agt,eaten,flee]=eat(agt,cn)
 
 %eating function for class elk
 %agt=elk object

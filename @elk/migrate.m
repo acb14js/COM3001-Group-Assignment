@@ -1,4 +1,4 @@
-function [agt]=migrate(agt,cn)
+function [agt]=migrate(agt,cn,flee)
 
 %migration functions for class elk
 %agt=elk object
@@ -52,7 +52,7 @@ elpos=MESSAGES.pos(el,:);                                     %extract positions
 mig=0;                          %flag will be reset to one if elk migrates
 [xf,yf]=find(loc_food);        %extract all rows (=x) and columns (=y) of food matrix where food is present
 
-if ~isempty(xf)
+if ~isempty(xf)&flee~=0
     xa=xmin+xf-1;                  %x co-ordiantes of all squares containing food
     ya=ymin+yf-1;                  %y co-ordiantes of all squares containing food
 
