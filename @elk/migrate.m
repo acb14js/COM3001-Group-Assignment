@@ -48,7 +48,6 @@ rpos=MESSAGES.pos(rb,:);                                     %extract positions 
 eltotal = length(el);
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 typ=MESSAGES.atype;                                         %extract types of all agents
 rb=find(typ==1);                                            %indices of all elks
 [loc_elks,xmin,ymin] = extract_local_food(cpos,spd,rb);      %extract positions of all elks
@@ -60,7 +59,7 @@ y_pos = ymin(rand_ind);
 if ~isempty(x_pos)&~isempty(y_pos)
     agt.pos=n_el_pos;
 end
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 mig=0;                          %flag will be reset to one if elk migrates
