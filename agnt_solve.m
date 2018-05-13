@@ -25,7 +25,6 @@ for cn=1:n
         [curr,klld]=die(curr,cn);                %death rule (from starvation or old age)
         if klld==0
             new=[];
-            if
             [curr,new]=breed(curr,cn);			%breeding rule
             if ~isempty(new)					%if current agent has bred during this iteration
                  n_new=n_new+1;                 %increase new agent number

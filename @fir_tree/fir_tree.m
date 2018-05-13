@@ -18,7 +18,7 @@ classdef fir_tree %declares fir tree object
                     else 
                         error('Input argument is not a fir tree')
                     end
-                case 2
+                case 3
                     f.age=varargin{1};
                     f.pos=varargin{2};
                     f.last_breed=varargin{3};

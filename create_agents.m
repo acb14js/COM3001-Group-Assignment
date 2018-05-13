@@ -22,8 +22,8 @@ tloc=(bm_size-1)*rand(nt,2)+1;      %generate random initial positions for fir t
 rloc=(bm_size-1)*rand(nr,2)+1;      %generate random initial positions for elks
 floc=(bm_size-1)*rand(nf,2)+1;      %generate random initial positions for wolfes
 
-rgen=();
-fgen=();
+%rgen=();
+%fgen=();
 
 MESSAGES.pos=[rloc;floc;tloc];
 
