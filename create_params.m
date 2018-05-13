@@ -16,7 +16,5 @@ global PARAM
     PARAM.F_MINFOOD=0;
     PARAM.R_FOODBRD=10;     %minimum food threshold for breeding
     PARAM.F_FOODBRD=10;
-    PARAM.R_MAXAGE=50;      %maximum age allowed 
-    PARAM.F_MAXAGE=50;
-    
-    
+    PARAM.R_MAXAGE=(365*10);      %maximum age allowed 
+    PARAM.F_MAXAGE=(365*7);
