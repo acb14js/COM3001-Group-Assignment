@@ -16,8 +16,8 @@ global PARAM
     %PARAM.T_MAXFOOD=50;
     PARAM.R_MINFOOD=0;      %minimum food threshold before agent dies 
     PARAM.F_MINFOOD=0;
-    PARAM.R_FOODBRD=10;     %minimum food threshold for breeding
-    PARAM.F_FOODBRD=10;
+    PARAM.R_FOODBRD=5;     %minimum food threshold for breeding
+    PARAM.F_FOODBRD=5;
     %PARAM.T_MAXAGE=50;      %may need change
     PARAM.R_MAXAGE=(365*16);      %maximum age allowed 
     PARAM.F_MAXAGE=(365*12.5);
