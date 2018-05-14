@@ -53,13 +53,19 @@ if d<=spd&length(nrst)>0    %if there is at least one  elk within the search rad
         s=round(rand*(length(nrst)-1))+1;
         nrst=nrst(s);
     end
-    pk=1-(d/spd);                       %probability that wolf will kill elk is ratio of speed to distance
+    %pk=1-(d/spd);                       %probability that wolf will kill elk is ratio of speed to distance
+    nx=MESSAGES.pos(nrst,1);    %extract exact location of this elk
+    ny=MESSAGES.pos(nrst,2);
+    npos=[nx ny];
+    agt.food=cfood+1;           %increase agent food by one unit
+    agt.pos=npos;               %move agent to position of this elk
+    pk=0.05;                       %probability that wolf will kill elk is ratio of speed to distance
     if pk>rand
-        nx=MESSAGES.pos(nrst,1);    %extract exact location of this elk
-        ny=MESSAGES.pos(nrst,2);
-        npos=[nx ny];
-        agt.food=cfood+1;           %increase agent food by one unit
-        agt.pos=npos;               %move agent to position of this elk
+%         nx=MESSAGES.pos(nrst,1);    %extract exact location of this elk
+%         ny=MESSAGES.pos(nrst,2);
+%         npos=[nx ny];
+%         agt.food=cfood+1;           %increase agent food by one unit
+%         agt.pos=npos;               %move agent to position of this elk
         IT_STATS.eaten(N_IT+1)=IT_STATS.eaten(N_IT+1)+1;                %update model statistics
         eaten=1;
         hungry=0;

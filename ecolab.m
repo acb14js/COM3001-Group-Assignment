@@ -27,7 +27,6 @@ function ecolab(fmode,outImages)
     close all
     
     nsteps = 3650; % 10 year period of study.
-
     size = 95; % 100km squared size of yellowstone
     nr = 1300; % 130:4 ratio of elk to wolves
     nf = 40;

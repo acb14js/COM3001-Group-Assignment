@@ -66,7 +66,7 @@ for r=1:nr
     pos=rloc(r,:);
     %create rabbit agents with random ages between 0 and 10 days and random
     %food levels 20-40
-    age=ceil(rand*10);
+    age=ceil(rand*PARAM.R_MAXAGE);
     food=ceil(rand*20)+20;
     lbreed=0;
     agent{r}=elk(age,food,pos,PARAM.R_SPD,lbreed);
@@ -77,7 +77,7 @@ for f=nr+1:nr+nf
     pos=floc(f-nr,:);
     %create fox agents with random ages between 0 and 10 days and random
     %food levels 20-40
-    age=ceil(rand*10);
+    age=ceil(rand*PARAM.F_MAXAGE);
     food=ceil(rand*20)+20;
     lbreed=0;
     agent{f}=wolf(age,food,pos,PARAM.F_SPD,lbreed);
