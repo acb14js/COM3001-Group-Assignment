@@ -28,15 +28,15 @@ cpos=round(pos);                     %round up position to nearest grid point
 %relpos=round(elpos);
 %mate=find(relpos==cpos);
 
-if cfood>=flim&last_breed==0&age>(365*3)  %if food > threshold and age > interval, then create offspring
+if cfood>=flim&last_breed==0&age>(365*2)  %if food > threshold and age > interval, then create offspring
    agt.last_breed=1;
 end
-if agt.last_breed > 1
+if agt.last_breed >= 1
     new=[];
     if agt.last_breed == tlim
         agt.last_breed=0;
         agt.food=cfood/2;                          %divide food level between 2 agents
-        new=wolf(0,cfood/2,pos,PARAM.F_SPD,0);   %new rabbit agent
+        new=wolf(0,cfood/2,pos,PARAM.F_SPD,0);   %new wolf agent
         IT_STATS.div_f(N_IT+1)=IT_STATS.div_f(N_IT+1)+1;             %update statistics
     end
     agt.last_breed = agt.last_breed + 1;
