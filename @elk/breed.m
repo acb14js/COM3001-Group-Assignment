@@ -20,13 +20,13 @@ last_breed=agt.last_breed;  %length of time since agent last reproduced
 pos=agt.pos;         %current position
 cpos=round(pos);                     %round up position to nearest grid point
 
-% typ=MESSAGES.atype;
-% el=find(typ==1);
-% gen=MESSAGES.gen(el);
-% elgen=find(gen==1);
-% elpos=MESSAGES.pos(elgen,:);
-% relpos=round(elpos);
-% mate=find(relpos==cpos)
+ %typ=MESSAGES.atype;
+ %el=find(typ==1);
+ %gen=MESSAGES.gen(el);
+ %elgen=find(gen==1);
+ %elpos=MESSAGES.pos(elgen,:);
+ %relpos=round(elpos);
+ %mate=find(relpos==cpos)
 
 if cfood>=flim&last_breed==0&age>(365*3)  %if food > threshold and age > interval, then create offspring
    agt.last_breed=1;
@@ -36,7 +36,7 @@ if agt.last_breed >= 1
     if agt.last_breed == tlim
         agt.last_breed=0;
         agt.food=cfood/2;                          %divide food level between 2 agents
-        new=elk(0,cfood/2,pos,PARAM.R_SPD,0);   %new rabbit agent
+        new=elk(0,cfood/2,pos,PARAM.R_SPD,0);   %new elk agent
         IT_STATS.div_r(N_IT+1)=IT_STATS.div_r(N_IT+1)+1;             %update statistics
     end
     agt.last_breed = agt.last_breed + 1;

@@ -49,7 +49,7 @@ nrst=rb(ind);                                                 %index of nearest 
 
 
 if d<=spd&length(nrst)>0    %if there is at least one  elk within the search radius        
-    if length(nrst)>1       %if more than one rabbit located at same distance then randomly pick one to head towards
+    if length(nrst)>1       %if more than one elk located at same distance then randomly pick one to head towards
         s=round(rand*(length(nrst)-1))+1;
         nrst=nrst(s);
     end
