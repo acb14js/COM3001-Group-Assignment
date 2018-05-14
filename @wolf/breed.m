@@ -19,6 +19,7 @@ age=agt.age;                %get current agent age
 last_breed=agt.last_breed;  %length of time since agent last reproduced
 pos=agt.pos;         %current position
 cpos=round(pos);                     %round up position to nearest grid point
+spd=agt.speed;
 
 %typ=MESSAGES.atype;
 %el=find(typ==2);
@@ -33,11 +34,25 @@ if cfood>=flim&last_breed==0&age>(365*2)  %if food > threshold and age > interva
 end
 if agt.last_breed >= 1
     new=[];
-    if agt.last_breed == tlim
+    if agt.last_breed >= tlim-3 && agt.last_breed<=tlim+3
+        
+        typ=MESSAGES.atype;                                         %extract types of all agents
+        rb=find(typ==2);                                            %indices of all elks
+        rpos=MESSAGES.pos(rb,:);                                     %extract positions of all wolf
+        csep=sqrt((rpos(:,1)-pos(:,1)).^2+(rpos(:,2)-pos(:,2)).^2);  %calculate distance to all wolf
+        loc_agt=find(csep<spd);
+        if ~isempty(loc_agt)
+            ind = round(rand);
+            if ind == 1     
+                agt.food=cfood/2;                          %divide food level between 2 agents        
+                new=wolf(0,cfood/2,pos,PARAM.F_SPD,0);   %new wolf agent
+                IT_STATS.div_f(N_IT+1)=IT_STATS.div_f(N_IT+1)+1;             %update statistics
+            end
+        end
+        
+    end
+    if agt.last_breed == tlim+3
         agt.last_breed=0;
-        agt.food=cfood/2;                          %divide food level between 2 agents
-        new=wolf(0,cfood/2,pos,PARAM.F_SPD,0);   %new wolf agent
-        IT_STATS.div_f(N_IT+1)=IT_STATS.div_f(N_IT+1)+1;             %update statistics
     end
     agt.last_breed = agt.last_breed + 1;
 else

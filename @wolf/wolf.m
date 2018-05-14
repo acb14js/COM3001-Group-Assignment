@@ -24,6 +24,7 @@ classdef wolf           %declares wolf object
                     f.pos=[];
                     f.speed=[];
                     f.last_breed=[];
+                 
                 case 1                         %input is already a wolf, so just return!
                     if (isa(varargin{1},'wolf'))		
                         f=varargin{1};
@@ -35,7 +36,7 @@ classdef wolf           %declares wolf object
                     f.food=varargin{2};              %current food content (arbitrary units)
                     f.pos=varargin{3};               %current position in Cartesian co-ords [x y]
                     f.speed=varargin{4};             %number of kilometres wolf can migrate in 1 day
-                    f.last_breed=varargin{5};        %number of iterations since wolf last reproduced.
+                    f.last_breed=varargin{5};        %number of iterations since wolf last reproduced.                    
                 otherwise
                     error('Invalid no. of input arguments for wolf')
             end
