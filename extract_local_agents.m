@@ -1,4 +1,4 @@
-function [loc_agt,xmin,ymin]=extract_local_agents(cpos,spd,typ_flag)
+function loc_agt=extract_local_agents(cpos,spd,typ_flag)
 
 %Extracts array representing distribution of food available in the local
 %area of an agent at position cpos [x,y] and with search radius =spd.
@@ -38,9 +38,7 @@ end
 
 typ = MESSAGES.atype;
 agt = find(typ==typ_flag);
-decision_mx = zeros(xmax-xmin, ymin-ymax);
 agt_pos = MESSAGES.pos(agt,:);
-decision_mx(agt_pos(1),agt_pos(2))
-[Num, Ind]=find(decision_mx)
-loc_agt=MESSAGES.pos(xmin:xmax,ymin:ymax);    %extract distribution of food within the local search radius
+agt_pos = round(agt_pos);
+loc_agt=agt_pos==xmin:xmax;    %extract distribution of agents within the local search radius
 

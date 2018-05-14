@@ -35,8 +35,8 @@ rpos=MESSAGES.pos(sp,:);                                    %extract positions o
 rpos=round(rpos);
 wpos = MESSAGES.pos(wo,:);
 wpos=round(wpos);
-iw = find(wpos == pos);
-isa = find(rpos == pos);
+iw = find(wpos == cpos);
+isa = find(rpos == cpos);
 cfood=agt.food;                                               %get current agent food level
 
 if isempty(iw)     

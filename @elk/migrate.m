@@ -40,17 +40,26 @@ spd=agt.speed;                       %elk migration speed in units per iteration
 %ymin is minimum y co-ord of this area
 [loc_food,xmin,ymin]=extract_local_food(cpos,spd);
 
-typ=MESSAGES.atype;
-el=find(typ==1);
-rb=find(el);
+mig=0;                          %flag will be reset to one if elk migrates
 
 rpos=MESSAGES.pos(rb,:);                                     %extract positions of all elks
 eltotal = length(el);
 elpos=MESSAGES.pos(el,:);                                     %extract positions of all elks
 [loc_agt,xmin,ymin]=extract_local_agents(cpos,spd,el);
 
+coin_toss = rand
+if coin_toss >0.5
+    typ=MESSAGES.atype;                                         %extract types of all agents
+    rb=find(typ==1);                                            %indices of all elks
+    rpos=MESSAGES.pos(rb,:);                                     %extract positions of all elks
+    csep=sqrt((rpos(:,1)-pos(:,1)).^2+(rpos(:,2)-pos(:,2)).^2);  %calculate distance to all elks
+    loc_agt=find(csep<spd);                                            %d is distance to closest elk, ind is index of that elk
+    loc_pos=MESSAGES.pos(loc_agt,:)
+    loc_pos = round(loc_pos)
+    ind = randi([1 length(loc_pos)],1,1)
+    agt.pos = loc_pos(ind, :);
+end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-mig=0;                          %flag will be reset to one if elk migrates
 [xf,yf]=find(loc_food);        %extract all rows (=x) and columns (=y) of food matrix where food is present
 
 if ~isempty(xf)&eaten~=-1

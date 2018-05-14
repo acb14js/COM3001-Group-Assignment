@@ -32,17 +32,17 @@ for cn=1:n
              end
         end
        agent{cn}=curr;                          %up date cell array with modified agent data structure
-    elseif isa(curr,'fir_tree')
-        [curr,klld]=die(curr,cn);
-        if klld==0
-            new=[];
-            [curr,new]=breed(curr,cn);			%breeding rule
-            if ~isempty(new)					%if current agent has bred during this iteration
-                 n_new=n_new+1;                 %increase new agent number
-                 agent{n+n_new}=new;			%add new to end of agent list
-             end
-        end
-        agent{cn}=curr; 
+    %elseif isa(curr,'fir_tree')
+    %    [curr,klld]=die(curr,cn);
+    %    if klld==0
+    %        new=[];
+    %        [curr,new]=breed(curr,cn);			%breeding rule
+    %        if ~isempty(new)					%if current agent has bred during this iteration
+    %             n_new=n_new+1;                 %increase new agent number
+    %             agent{n+n_new}=new;			%add new to end of agent list
+    %         end
+    %    end
+    %    agent{cn}=curr; 
     end
 end
 
