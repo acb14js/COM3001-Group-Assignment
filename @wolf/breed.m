@@ -21,17 +21,18 @@ pos=agt.pos;         %current position
 cpos=round(pos);                     %round up position to nearest grid point
 spd=agt.speed;
 
-%typ=MESSAGES.atype;
-%el=find(typ==2);
-%gen=MESSAGES.gen(el);
-%elgen=find(gen==1);
-%elpos=MESSAGES.pos(elgen,:);
-%relpos=round(elpos);
-%mate=find(relpos==cpos);
+typ=MESSAGES.atype;
+el=find(typ==2);
+gen=MESSAGES.gen(el);
+elgen=find(gen==1);
+elpos=MESSAGES.pos(elgen,:);
+relpos=round(elpos);
+mate=find(relpos==cpos);
 
-if cfood>=flim&last_breed==0&age>(365*2)  %if food > threshold and age > interval, then create offspring
+if cfood>=flim&last_breed==0&age>(365*3)&mate>1  %if food > threshold and age > interval, then create offspring
    agt.last_breed=1;
 end
+<<<<<<< HEAD
 if agt.last_breed >= 1
     new=[];
     if agt.last_breed >= tlim-3 && agt.last_breed<=tlim+3
@@ -53,6 +54,14 @@ if agt.last_breed >= 1
     end
     if agt.last_breed == tlim+3
         agt.last_breed=0;
+=======
+if agt.last_breed > 1
+    if agt.last_breed == tlim
+        agt.last_breed=0;
+        agt.food=cfood/2;                          %divide food level between 2 agents
+        new=elk(0,cfood/2,pos,PARAM.R_SPD,0);   %new rabbit agent
+        IT_STATS.div_r(N_IT+1)=IT_STATS.div_r(N_IT+1)+1;             %update statistics
+>>>>>>> 9f3352df9944c0fca30a697f12414a6572093c6f
     end
     agt.last_breed = agt.last_breed + 1;
 else
