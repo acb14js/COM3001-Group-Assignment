@@ -6,14 +6,15 @@ function [agt,klld]=die(agt,cn)
 
 %fir trees die if they are older than max_age
 
-global PARAM IT_STATS N_IT MESSAGES
+global IT_STATS N_IT MESSAGES
 
 klld=0;
-age=agt.age;                %get current agent age
+cfood = cell2mat(agt.food);
+%age=agt.age
 
-if age>PARAM.R_MAXAGE      %if age > max age then agent dies
-    IT_STATS.died_r(N_IT+1)=IT_STATS.died_r(N_IT+1)+1;  %update statistics
+if cfood==0
+%if age>PARAM.F_MAXAGE
+    IT_STATS.died_t(N_IT+1)=IT_STATS.died_t(N_IT+1)+1;  %update statistics
     MESSAGES.dead(cn)=1;                %update message list
     klld=1;
 end
-

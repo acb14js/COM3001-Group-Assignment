@@ -1,4 +1,4 @@
-function [agt,eaten]=eat(agt,cn)
+function [agt,eaten,flee]=eat(agt,cn)
 
 %eating function for class elk
 %agt=elk object
@@ -26,37 +26,27 @@ function [agt,eaten]=eat(agt,cn)
 global  ENV_DATA MESSAGES
 
 pos=agt.pos;                            %extract current position 
+cpos=round(pos);                        %round up position to nearest grid point
 
 typ=MESSAGES.atype;                                         %extract types of all agents
-wo=find(typ==2);                                            %indices of all wolves
 sp=find(typ==3);                                            %indices of all splings
-rpos=MESSAGES.pos(sp,:);                                     %extract positions of all elks
-csep=sqrt((rpos(:,1)-pos(:,1)).^2+(rpos(:,2)-pos(:,2)).^2);  %calculate distance to all elks
-dwo=sqrt((rpos(:,1)-pos(:,1)).^2+(rpos(:,2)-pos(:,2)).^2);
-[d,ind]=min(csep);                                            %d is distance to closest elk, ind is index of that elk
-nrsp=sp(ind);                                                %index of nearest elk(s)
+wo = find(typ==2);
+rpos=MESSAGES.pos(sp,:);                                    %extract positions of all sapling
+rpos=round(rpos);
+wpos = MESSAGES.pos(wo,:);
+wpos=round(wpos);
+iw = find(wpos == pos);
+isa = find(rpos == pos);
+cfood=agt.food;                                               %get current agent food level
 
-for i = 1: length(dwo) - 1
-    if dwo(i) > 3
-        dwo(i) = [];
-    else
-       p = rand
-       if p < 0.5
-           dwo(i) = [];
-       end
-    end
-end
-
-if length(dwo) < 1   
-    cfood=agt.food;                         %get current agent food level
-    sfood = nrsp.food;                      %remaining food of the sapling
-    cpos=round(pos);                        %round up position to nearest grid point
+if isempty(iw)     
     pfood=ENV_DATA.food(cpos(1),cpos(2));   %obtain environment food level at current location
 
-    if nrsp.pos == pos                          %if there is a sapling at the positon
-        if nrsp.age >= 15                       %if the spling is in the age renge
+    if ~isempty(isa)                         %if there is a sapling at the positon
+        sfood = isa.food;                      %remaining food of the sapling
+        if isa.age >= 15                       %if the spling is in the age renge
             if sfood>=1                         %if the spling still eatable
-                nrsp.food = sfood-1;            %increase agent food by one unit
+                MESSAGES.food(isa) = sfood-1;            %decrease agent food by one unit
                 agt.food = cfood+1;             %deduce spling food store by one unit
             end
         end
@@ -70,7 +60,10 @@ if length(dwo) < 1
     end
 else    
    agt.food=cfood-1;                   
-    eaten=0;    
+    eaten=-1;    
 end
+    
+   
+
     
    

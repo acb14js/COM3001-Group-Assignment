@@ -13,6 +13,7 @@ global PARAM
     PARAM.T_BRDFQ=365;       %may need change 
     PARAM.R_BRDFQ=250;      %breeding frequency - iterations
     PARAM.F_BRDFQ=63;
+    PARAM.T_MAXFOOD=50;
     PARAM.R_MINFOOD=0;      %minimum food threshold before agent dies 
     PARAM.F_MINFOOD=0;
     PARAM.R_FOODBRD=10;     %minimum food threshold for breeding

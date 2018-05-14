@@ -20,7 +20,7 @@ for cn=1:n
     if isa(curr,'elk')|isa(curr,'wolf')
         [curr,eaten]=eat(curr,cn);               %eating rules (elks eat food, wolfes eat elks)
         if eaten==0
-            curr=migrate(curr,cn);              %if no food was eaten, then migrate in search of some
+            curr=migrate(curr,cn,eaten);              %if no food was eaten, then migrate in search of some
         end
         [curr,klld]=die(curr,cn);                %death rule (from starvation or old age)
         if klld==0
@@ -32,6 +32,17 @@ for cn=1:n
              end
         end
        agent{cn}=curr;                          %up date cell array with modified agent data structure
+    elseif isa(curr,'fir_tree')
+        [curr,klld]=die(curr,cn);
+        if klld==0
+            new=[];
+            [curr,new]=breed(curr,cn);			%breeding rule
+            if ~isempty(new)					%if current agent has bred during this iteration
+                 n_new=n_new+1;                 %increase new agent number
+                 agent{n+n_new}=new;			%add new to end of agent list
+             end
+        end
+        agent{cn}=curr; 
     end
 end
 

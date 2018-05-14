@@ -26,21 +26,24 @@ function ecolab(fmode,outImages)
     clear global
     close all
 
+    nsteps = 5; % 10 year period of study.
+
     nsteps = 3650; % 10 year period of study.
+
     size = 95; % 100km squared size of yellowstone
     nr = 1300; % 130:4 ratio of elk to wolves
     nf = 40;
-    nt = 75;
+    nt = 100;
 
     global N_IT IT_STATS ENV_DATA CONTROL_DATA
 
-    if nargin == 4
+    if nargin == 0
         fmode=true;
         outImages=false;
-    elseif nargin == 5
+    elseif nargin == 1
         outImages=false;
     end
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
     %MODEL INITIALISATION
     create_control;                     %sets up the parameters to control fmode (speed up the code during experimental testing
     create_params;                      %sets the parameters for this simulation
@@ -49,7 +52,7 @@ function ecolab(fmode,outImages)
     [agent]=create_agents(nt,nr,nf);       %create nr elk and nf wolf agents and places them in a cell array called 'agents'
     create_messages(nt,nr,nf,agent);       %sets up the initial message lists
     initialise_results(nt,nr,nf,nsteps);   %initilaises structure for storing results
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
     %MODEL EXECUTION
     for n_it=1:nsteps                   %the main execution loop
         N_IT=n_it;

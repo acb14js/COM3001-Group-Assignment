@@ -18,23 +18,24 @@ function [agent]=create_agents(nt,nr,nf)
 global ENV_DATA MESSAGES PARAM 
   
 bm_size=ENV_DATA.bm_size;
-tloc=(bm_size-1)*rand(nt,2)+1;      %generate random initial positions for fir trees
+%tloc=(bm_size-1)*rand(nt,2)+1;      %generate random initial positions for fir trees
 rloc=(bm_size-1)*rand(nr,2)+1;      %generate random initial positions for elks
 floc=(bm_size-1)*rand(nf,2)+1;      %generate random initial positions for wolfes
 
-%rgen=();
-%fgen=();
+gen=randi([0 1],1,nt+nr+nf);
 
-MESSAGES.pos=[rloc;floc;tloc];
+MESSAGES.pos=[tloc:rloc,floc];
+MESSAGES.gen=[gen];
 
 %generate all fir_tree agents and record their positions in ENV_MAT_R
 for t=1:nt
     pos=tloc(t,:);
     %create fir_tree agents with random ages between 0 and 10 days and random
     %food levels 20-40
+    food = 50;
     age=ceil(rand*10);
     lbreed=round(rand*PARAM.R_BRDFQ);
-    agent{t}=fir_tree(age,pos,lbreed);
+    agent{t}=fir_tree(age,pos,lbreed,food);
 end
 
 %generate all elk agents and record their positions in ENV_MAT_R

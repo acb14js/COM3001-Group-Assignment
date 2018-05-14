@@ -3,6 +3,7 @@ classdef fir_tree %declares fir tree object
         age;
         pos;
         last_breed;
+        food;
     end
     
     methods
@@ -10,18 +11,20 @@ classdef fir_tree %declares fir tree object
             switch nargin
                 case 0
                     f.age=[];
-                    f.pos=[];
                     f.last_breed=[];
+                    f.food=[];
+                    f.pos=[];
                 case 1
                     if (isa(varargin{1},'fir_tree'))
                         f=varargin{1};
                     else 
                         error('Input argument is not a fir tree')
                     end
-                case 3
+                case 4
                     f.age=varargin{1};
                     f.pos=varargin{2};
                     f.last_breed=varargin{3};
+                    f.food = varargin(4);
                 otherwise
                     error('Invalid no. of input arguments for fir tree')
             end

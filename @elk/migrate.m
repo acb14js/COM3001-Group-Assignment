@@ -1,4 +1,4 @@
-function [agt]=migrate(agt,cn, flee)
+function [agt]=migrate(agt,cn,eaten)
 
 %migration functions for class elk
 %agt=elk object
@@ -42,38 +42,24 @@ spd=agt.speed;                       %elk migration speed in units per iteration
 
 typ=MESSAGES.atype;
 el=find(typ==1);
-find(el)
+rb=find(el);
 
 rpos=MESSAGES.pos(rb,:);                                     %extract positions of all elks
 eltotal = length(el);
-
-
-typ=MESSAGES.atype;                                         %extract types of all agents
-rb=find(typ==1);                                            %indices of all elks
-[loc_elks,xmin,ymin] = extract_local_food(cpos,spd,rb);      %extract positions of all elks
-num_elk = length(loc_elks);
-rand_ind = ceil(randi([0, num_elk], 1));
-x_pos = xmin(rand_ind);
-y_pos = ymin(rand_ind);
-
-if ~isempty(x_pos)&~isempty(y_pos)
-    agt.pos=n_el_pos;
-end
-
+elpos=MESSAGES.pos(el,:);                                     %extract positions of all elks
+[loc_agt,xmin,ymin]=extract_local_agents(cpos,spd,el);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 mig=0;                          %flag will be reset to one if elk migrates
 [xf,yf]=find(loc_food);        %extract all rows (=x) and columns (=y) of food matrix where food is present
 
-if ~isempty(xf)
+if ~isempty(xf)&eaten~=-1
     xa=xmin+xf-1;                  %x co-ordiantes of all squares containing food
     ya=ymin+yf-1;                  %y co-ordiantes of all squares containing food
 
     csep=sqrt((xa-pos(:,1)).^2+(ya-pos(:,2)).^2);   %calculate distance to all food
 
     [d,nrst]=min(csep);     %d is distance to closest food, nrst is index of that food
-
-    [dtmp,nrsttmp]=min(times(csep,dotter*1000))
 
     if d<=spd       %if there is at least one lot of food within the search radius
         if length(nrst)>1       %if more lot of food located at same distance then randomly pick one to head towards
@@ -92,7 +78,7 @@ if ~isempty(xf)
     end
 end
 
-if mig==0&flee==1                                  %elk has been unable to find food, so chooses a random direction to move in
+if mig==0                                   %elk has been unable to find food, so chooses a random direction to move in
     cnt=1;
     dir=rand*2*pi;
     while mig==0&cnt<=8
